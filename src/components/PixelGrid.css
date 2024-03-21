@@ -1,0 +1,32 @@
+.pixel-grid {
+       display: flex;
+       flex-direction: column;
+       overflow-x: auto;
+       width: fit-content;
+}
+
+.row {
+       display: flex;
+}
+
+.pixel {
+       box-sizing: border-box;
+       width: 60px;
+       height: 60px;
+       border: 1px solid black;
+}
+
+.pixel:hover {
+       width: 60px;
+       height: 60px;
+       background: black;
+       cursor: pointer;
+}
+
+.active {
+       background-color: black; /* Change color as needed */
+}
+
+.selected {
+       border: 7px solid rgb(255, 0, 0);
+}
