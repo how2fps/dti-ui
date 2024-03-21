@@ -3,10 +3,10 @@ import ColorPickerModal from "./ColorPickModal";
 import "./PixelGrid.css";
 
 const PixelGrid = () => {
-       const [selectedPixel, setSelectedPixel] = useState([0, 0]);
+       const [isModalOpen, setIsModalOpen] = useState(false);
+       const [selectedPixel, setSelectedPixel] = useState(null);
        const numRows = 10;
        const numCols = 70;
-       const [hsva, setHsva] = useState({ h: 214, s: 43, v: 90, a: 1 });
 
        const grid = Array.from({ length: numRows }, () => Array.from({ length: numCols }, () => false));
 
@@ -30,7 +30,7 @@ const PixelGrid = () => {
                                    </div>
                             ))}
                      </div>
-                     <ColorPickerModal />
+                     <ColorPickerModal selectedPixel={selectedPixel} setSelectedPixel={setSelectedPixel}  />
               </>
        );
 };
