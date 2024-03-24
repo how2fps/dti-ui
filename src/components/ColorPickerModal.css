@@ -1,0 +1,7 @@
+.modal-overlay {
+       display: none;
+}
+
+.modal-overlay .show {
+       display: fixed;
+}

@@ -1,7 +1,7 @@
 import { hsvaToRgbString } from "@uiw/color-convert";
 import { Wheel } from "@uiw/react-color";
 import { React, useState } from "react";
-import "./PixelGrid.css";
+import "./ColorPickerModal.css";
 
 const ColorPickerModal = ({ selectedPixel, setSelectedPixel }) => {
        const [hsva, setHsva] = useState({ h: 214, s: 43, v: 90, a: 1 });

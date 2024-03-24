@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ColorPickerModal from "./ColorPickModal";
+import ColorPickerModal from "./ColorPickerModal";
 import "./PixelGrid.css";
 
 const PixelGrid = () => {
@@ -23,14 +23,17 @@ const PixelGrid = () => {
                                                                setSelectedPixel([rowIndex, colIndex]);
                                                                console.log(rowIndex, colIndex);
                                                         }}
-                                                        className={`pixel ${col ? "active" : ""}${selectedPixel[0] === rowIndex && selectedPixel[1] === colIndex ? "selected" : ""}`}
+                                                        className={`pixel ${col ? "active" : ""}${selectedPixel && selectedPixel[0] === rowIndex && selectedPixel[1] === colIndex ? "selected" : ""}`}
                                                         key={`${rowIndex}-${colIndex}`}
                                                  />
                                           ))}
                                    </div>
                             ))}
                      </div>
-                     <ColorPickerModal selectedPixel={selectedPixel} setSelectedPixel={setSelectedPixel}  />
+                     <ColorPickerModal
+                            selectedPixel={selectedPixel}
+                            setSelectedPixel={setSelectedPixel}
+                     />
               </>
        );
 };

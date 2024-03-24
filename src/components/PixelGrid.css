@@ -3,6 +3,9 @@
        flex-direction: column;
        overflow-x: auto;
        width: fit-content;
+       padding-top: 7.9vw;
+       margin: 0;
+       padding-bottom: 0;
 }
 
 .row {
@@ -11,22 +14,20 @@
 
 .pixel {
        box-sizing: border-box;
-       width: 60px;
-       height: 60px;
+       width: 55px;
+       height: 55px;
        border: 1px solid black;
 }
 
 .pixel:hover {
-       width: 60px;
-       height: 60px;
-       background: black;
+       background: rgb(215, 215, 215);
        cursor: pointer;
 }
 
 .active {
-       background-color: black; /* Change color as needed */
+       background-color: grey; /* Change color as needed */
 }
 
 .selected {
-       border: 7px solid rgb(255, 0, 0);
+       border: 5px solid rgb(255, 0, 0);
 }
