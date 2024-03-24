@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ColorPickerModal from "./ColorPickerModal";
 import "./PixelGrid.css";
 
 const PixelGrid = () => {
        const [isModalOpen, setIsModalOpen] = useState(false);
        const [selectedPixel, setSelectedPixel] = useState(null);
-       const numRows = 10;
-       const numCols = 70;
+       const [gridData, setGridData] = useState(Array(10).fill(Array(70).fill("")));
 
-       const grid = Array.from({ length: numRows }, () => Array.from({ length: numCols }, () => false));
+       useEffect(() => {
+              console.log(gridData);
+       }, [gridData]);
+
+       useEffect(() => {
+              console.log(selectedPixel);
+       }, [selectedPixel]);
 
        return (
               <>
                      <div className="pixel-grid">
-                            {grid.map((row, rowIndex) => (
+                            {gridData.map((row, rowIndex) => (
                                    <div
                                           className="row"
                                           key={rowIndex}>
@@ -30,6 +35,7 @@ const PixelGrid = () => {
                             ))}
                      </div>
                      <ColorPickerModal
+                            setGridData={setGridData}
                             selectedPixel={selectedPixel}
                             setSelectedPixel={setSelectedPixel}
                      />

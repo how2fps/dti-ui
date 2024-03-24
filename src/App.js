@@ -1,5 +1,3 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import PixelGrid from "./components/PixelGrid";
@@ -40,32 +38,20 @@ function App() {
               }
        }, []); // Empty dependency array ensures useEffect runs only once on component mount
 
-       const firebaseConfig = {
-              apiKey: "AIzaSyCdDsg6x19bzJAokeCqtfdBYpv4aoQUH64",
-              authDomain: "dti-ui.firebaseapp.com",
-              projectId: "dti-ui",
-              storageBucket: "dti-ui.appspot.com",
-              messagingSenderId: "283041040161",
-              appId: "1:283041040161:web:de955f8da2c49742492060",
-              measurementId: "G-BTYJBZYSYT",
-       };
-
        useEffect(() => {
               console.log(canScrollRight);
        }, [canScrollRight]);
        // Initialize Firebase
-       const app = initializeApp(firebaseConfig);
-       const db = getFirestore(app);
 
        return (
               <div
                      className="App"
                      ref={containerRef}>
                      <div className="header">
-                            {canScrollRight ? <div>scroll right</div> : ""}
+                            {canScrollRight ? <div style={{ position: "absolute", fontSize: "1vw" }}>scroll right</div> : ""}
                             <h1 className="header-text">Pick A Pixel</h1>
                      </div>
-                     <PixelGrid db={db} />
+                     <PixelGrid />
               </div>
        );
 }
