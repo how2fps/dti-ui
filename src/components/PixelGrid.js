@@ -19,9 +19,8 @@ const PixelGrid = () => {
                                           key={rowIndex}>
                                           {row.map((col, colIndex) => (
                                                  <div
-                                                        onClick={(row, col) => {
+                                                        onClick={() => {
                                                                setSelectedPixel([rowIndex, colIndex]);
-                                                               console.log(rowIndex, colIndex);
                                                         }}
                                                         className={`pixel ${col ? "active" : ""}${selectedPixel && selectedPixel[0] === rowIndex && selectedPixel[1] === colIndex ? "selected" : ""}`}
                                                         key={`${rowIndex}-${colIndex}`}

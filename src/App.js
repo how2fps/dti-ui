@@ -25,10 +25,12 @@ function App() {
                      const handleScroll = () => {
                             const { scrollTop, scrollLeft, scrollHeight, scrollWidth, clientHeight, clientWidth } = container;
                             setCanScrollUp(scrollTop > 0);
-                            console.log("hi");
                             setCanScrollDown(scrollTop < scrollHeight - clientHeight);
                             setCanScrollLeft(scrollLeft > 0);
                             setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
+                            console.log(scrollLeft < scrollWidth - clientWidth);
+                            console.log(scrollLeft);
+                            console.log(scrollWidth - clientWidth);
                      };
 
                      window.addEventListener("scroll", handleScroll);
