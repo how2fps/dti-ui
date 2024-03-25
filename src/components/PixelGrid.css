@@ -17,17 +17,14 @@
        width: 55px;
        height: 55px;
        border: 1px solid black;
+       background: white;
 }
 
 .pixel:hover {
-       background: rgb(215, 215, 215);
+       background: rgb(135, 124, 124);
        cursor: pointer;
 }
 
-.active {
-       background-color: grey; /* Change color as needed */
-}
-
 .selected {
-       border: 5px solid rgb(255, 0, 0);
+       border: 5px solid black;
 }

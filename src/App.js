@@ -26,9 +26,8 @@ function App() {
                             setCanScrollDown(scrollTop < scrollHeight - clientHeight);
                             setCanScrollLeft(scrollLeft > 0);
                             setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
-                            console.log(scrollLeft < scrollWidth - clientWidth);
-                            console.log(scrollLeft);
-                            console.log(scrollWidth - clientWidth);
+                            console.log(container.clientHeight);
+                            console.log(container.getBoundingClientRect());
                      };
 
                      window.addEventListener("scroll", handleScroll);
@@ -38,9 +37,7 @@ function App() {
               }
        }, []); // Empty dependency array ensures useEffect runs only once on component mount
 
-       useEffect(() => {
-              console.log(canScrollRight);
-       }, [canScrollRight]);
+       useEffect(() => {}, [canScrollRight]);
        // Initialize Firebase
 
        return (

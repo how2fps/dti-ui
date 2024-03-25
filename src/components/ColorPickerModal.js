@@ -19,14 +19,15 @@ const ColorPickerModal = ({ selectedPixel, setSelectedPixel, setGridData }) => {
                                    "Content-Type": "application/json",
                                    "Access-Control-Allow-Origin": "*",
                             },
-                            body: JSON.stringify({ rgb: hsvaToRgbString(hsva) }),
+                            body: JSON.stringify({ rgb: hsvaToRgbString(hsva), coordinates: selectedPixel }),
                      });
                      console.log(response.status);
                      setGridData((prevGridData) => {
-                            prevGridData[selectedPixel[0]][selectedPixel[1]] = hsvaToRgbString(hsva);
-                            console.log(prevGridData);
+                            const newGridData = prevGridData.slice().map((element) => (Array.isArray(element) ? element.slice() : element));
                             console.log(selectedPixel);
-                            return prevGridData;
+                            console.log(prevGridData[selectedPixel[0]][selectedPixel[0]]);
+                            newGridData[selectedPixel[0]][selectedPixel[1]] = hsvaToRgbString(hsva);
+                            return newGridData;
                      });
                      setSelectedPixel(null);
               } catch (error) {
@@ -40,7 +41,7 @@ const ColorPickerModal = ({ selectedPixel, setSelectedPixel, setGridData }) => {
                      onClose={closeModal}
                      aria-labelledby="modal-modal-title"
                      aria-describedby="modal-modal-description">
-                     <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", background: "rgba(255,255,255,0.2)" }}>
+                     <div style={{ marginTop: "20vh", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", background: "rgba(255,255,255,0.2)" }}>
                             <Typography
                                    id="modal-modal-title"
                                    variant="h6"

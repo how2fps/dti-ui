@@ -24,10 +24,11 @@ const PixelGrid = () => {
                                           key={rowIndex}>
                                           {row.map((col, colIndex) => (
                                                  <div
+                                                        className={`pixel ${selectedPixel && selectedPixel[0] === rowIndex && selectedPixel[1] === colIndex ? "selected" : ""}`}
+                                                        style={gridData && gridData[rowIndex][colIndex].length > 0 ? { background: gridData[rowIndex][colIndex] } : { background: "white" }}
                                                         onClick={() => {
                                                                setSelectedPixel([rowIndex, colIndex]);
                                                         }}
-                                                        className={`pixel ${col ? "active" : ""}${selectedPixel && selectedPixel[0] === rowIndex && selectedPixel[1] === colIndex ? "selected" : ""}`}
                                                         key={`${rowIndex}-${colIndex}`}
                                                  />
                                           ))}
