@@ -7,6 +7,42 @@ function App() {
        const [canScrollDown, setCanScrollDown] = useState(false);
        const [canScrollLeft, setCanScrollLeft] = useState(false);
        const [canScrollRight, setCanScrollRight] = useState(false);
+       const [gridData, setGridData] = useState(Array(10).fill(Array(70).fill("")));
+
+       useEffect(() => {
+              async function fetchPixels() {
+                     try {
+                            const response = await fetch("http://localhost:3000/pixel");
+                            const reader = response.body.getReader();
+                            const chunks = [];
+                            // Function to consume the stream
+                            const consumeStream = async () => {
+                                   try {
+                                          while (true) {
+                                                 const { done, value } = await reader.read();
+                                                 if (done) {
+                                                        break;
+                                                 }
+                                                 chunks.push(new TextDecoder().decode(value));
+                                                 // Process the chunk as needed
+                                          }
+                                   } catch (error) {
+                                          console.error("Error reading stream:", error);
+                                   } finally {
+                                          reader.releaseLock(); // Release the lock when finished reading
+                                   }
+                            };
+
+                            // Call the function to consume the stream
+                            await consumeStream();
+                            const pixelGridData = JSON.parse(chunks.join());
+                            setGridData(pixelGridData);
+                     } catch (e) {
+                            console.log(e);
+                     }
+              }
+              fetchPixels();
+       }, []);
 
        useEffect(() => {
               const container = containerRef.current;
@@ -26,8 +62,6 @@ function App() {
                             setCanScrollDown(scrollTop < scrollHeight - clientHeight);
                             setCanScrollLeft(scrollLeft > 0);
                             setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
-                            console.log(container.clientHeight);
-                            console.log(container.getBoundingClientRect());
                      };
 
                      window.addEventListener("scroll", handleScroll);
@@ -48,7 +82,10 @@ function App() {
                             {canScrollRight ? <div style={{ position: "absolute", fontSize: "1vw" }}>scroll right</div> : ""}
                             <h1 className="header-text">Pick A Pixel</h1>
                      </div>
-                     <PixelGrid />
+                     <PixelGrid
+                            gridData={gridData}
+                            setGridData={setGridData}
+                     />
               </div>
        );
 }

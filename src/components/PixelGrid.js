@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ColorPickerModal from "./ColorPickerModal";
 import "./PixelGrid.css";
 
-const PixelGrid = () => {
+const PixelGrid = ({ gridData, setGridData }) => {
        const [isModalOpen, setIsModalOpen] = useState(false);
        const [selectedPixel, setSelectedPixel] = useState(null);
-       const [gridData, setGridData] = useState(Array(10).fill(Array(70).fill("")));
 
-       useEffect(() => {
-              console.log(gridData);
-       }, [gridData]);
-
-       useEffect(() => {
-              console.log(selectedPixel);
-       }, [selectedPixel]);
+       const alphabetArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
        return (
               <>

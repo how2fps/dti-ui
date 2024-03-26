@@ -12,6 +12,14 @@ const ColorPickerModal = ({ selectedPixel, setSelectedPixel, setGridData }) => {
 
        const changePixelColor = async (selectedPixel) => {
               try {
+                     let newGridData;
+                     setGridData((prevGridData) => {
+                            newGridData = prevGridData.slice().map((element) => (Array.isArray(element) ? element.slice() : element));
+                            console.log(selectedPixel);
+                            console.log(prevGridData[selectedPixel[0]][selectedPixel[0]]);
+                            newGridData[selectedPixel[0]][selectedPixel[1]] = hsvaToRgbString(hsva);
+                            return newGridData;
+                     });
                      const response = await fetch("http://localhost:3000/pixel", {
                             method: "POST",
                             mode: "cors",
@@ -19,15 +27,7 @@ const ColorPickerModal = ({ selectedPixel, setSelectedPixel, setGridData }) => {
                                    "Content-Type": "application/json",
                                    "Access-Control-Allow-Origin": "*",
                             },
-                            body: JSON.stringify({ rgb: hsvaToRgbString(hsva), coordinates: selectedPixel }),
-                     });
-                     console.log(response.status);
-                     setGridData((prevGridData) => {
-                            const newGridData = prevGridData.slice().map((element) => (Array.isArray(element) ? element.slice() : element));
-                            console.log(selectedPixel);
-                            console.log(prevGridData[selectedPixel[0]][selectedPixel[0]]);
-                            newGridData[selectedPixel[0]][selectedPixel[1]] = hsvaToRgbString(hsva);
-                            return newGridData;
+                            body: JSON.stringify({ rgb: hsvaToRgbString(hsva), coordinates: selectedPixel, newGridData: newGridData }),
                      });
                      setSelectedPixel(null);
               } catch (error) {
