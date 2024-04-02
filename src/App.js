@@ -14,6 +14,7 @@ function App() {
                      try {
                             const response = await fetch("http://localhost:3000/pixel");
                             const reader = response.body.getReader();
+                            console.log(reader);
                             const chunks = [];
                             const consumeStream = async () => {
                                    try {
@@ -34,6 +35,7 @@ function App() {
                             // Call the function to consume the stream
                             await consumeStream();
                             const pixelGridData = JSON.parse(chunks.join());
+                            console.log(pixelGridData);
                             setGridData(pixelGridData);
                      } catch (e) {
                             console.log(e);
@@ -77,7 +79,7 @@ function App() {
                      className="App"
                      ref={containerRef}>
                      <div className="header">
-                             {/* {canScrollRight ? <div style={{ position: "absolute", fontSize: "1vw" }}>scroll right</div> : ""} */}
+                            {/* {canScrollRight ? <div style={{ position: "absolute", fontSize: "1vw" }}>scroll right</div> : ""} */}
                             <h1 className="header-text">Pick A Pixel</h1>
                      </div>
                      <PixelGrid
