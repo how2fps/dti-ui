@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import PixelGrid from "./components/PixelGrid";
+import PixelGrid from "./components/PixelGrid.js";
 function App() {
        const containerRef = useRef(null);
        // const [canScrollUp, setCanScrollUp] = useState(false);
@@ -75,9 +75,7 @@ function App() {
        // // Initialize Firebase
 
        return (
-              <div
-                     className="App"
-                     ref={containerRef}>
+              <div className="App" ref={containerRef}>
                      <div className="header">
                             {/* {canScrollRight ? <div style={{ position: "absolute", fontSize: "1vw" }}>scroll right</div> : ""} */}
                             <h1 className="header-text">Pick A Pixel</h1>
