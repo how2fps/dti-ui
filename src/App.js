@@ -3,10 +3,10 @@ import "./App.css";
 import PixelGrid from "./components/PixelGrid.js";
 function App() {
        const containerRef = useRef(null);
-       const [canScrollUp, setCanScrollUp] = useState(false);
-       const [canScrollDown, setCanScrollDown] = useState(false);
-       const [canScrollLeft, setCanScrollLeft] = useState(false);
-       const [canScrollRight, setCanScrollRight] = useState(false);
+       // const [canScrollUp, setCanScrollUp] = useState(false);
+       // const [canScrollDown, setCanScrollDown] = useState(false);
+       // const [canScrollLeft, setCanScrollLeft] = useState(false);
+       // const [canScrollRight, setCanScrollRight] = useState(false);
        const [gridData, setGridData] = useState(Array(10).fill(Array(70).fill("")));
 
        useEffect(() => {
@@ -15,7 +15,6 @@ function App() {
                             const response = await fetch("http://localhost:3000/pixel");
                             const reader = response.body.getReader();
                             const chunks = [];
-                            // Function to consume the stream
                             const consumeStream = async () => {
                                    try {
                                           while (true) {
@@ -24,7 +23,6 @@ function App() {
                                                         break;
                                                  }
                                                  chunks.push(new TextDecoder().decode(value));
-                                                 // Process the chunk as needed
                                           }
                                    } catch (error) {
                                           console.error("Error reading stream:", error);
@@ -44,40 +42,40 @@ function App() {
               fetchPixels();
        }, []);
 
-       useEffect(() => {
-              const container = containerRef.current;
-              if (container) {
-                     const { scrollTop, scrollLeft, scrollHeight, scrollWidth, clientHeight, clientWidth } = container;
+       // useEffect(() => {
+       //        const container = containerRef.current;
+       //        if (container) {
+       //               const { scrollTop, scrollLeft, scrollHeight, scrollWidth, clientHeight, clientWidth } = container;
 
-                     // Check if scrolling is possible in each direction
-                     setCanScrollUp(scrollTop > 0);
-                     setCanScrollDown(scrollTop < scrollHeight - clientHeight);
-                     setCanScrollLeft(scrollLeft > 0);
-                     setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
+       //               // Check if scrolling is possible in each direction
+       //               setCanScrollUp(scrollTop > 0);
+       //               setCanScrollDown(scrollTop < scrollHeight - clientHeight);
+       //               setCanScrollLeft(scrollLeft > 0);
+       //               setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
 
-                     // Listen to scroll events to update scrolling status dynamically
-                     const handleScroll = () => {
-                            const { scrollTop, scrollLeft, scrollHeight, scrollWidth, clientHeight, clientWidth } = container;
-                            setCanScrollUp(scrollTop > 0);
-                            setCanScrollDown(scrollTop < scrollHeight - clientHeight);
-                            setCanScrollLeft(scrollLeft > 0);
-                            setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
-                     };
+       //               // Listen to scroll events to update scrolling status dynamically
+       //               const handleScroll = () => {
+       //                      const { scrollTop, scrollLeft, scrollHeight, scrollWidth, clientHeight, clientWidth } = container;
+       //                      setCanScrollUp(scrollTop > 0);
+       //                      setCanScrollDown(scrollTop < scrollHeight - clientHeight);
+       //                      setCanScrollLeft(scrollLeft > 0);
+       //                      setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
+       //               };
 
-                     window.addEventListener("scroll", handleScroll);
-                     return () => {
-                            window.removeEventListener("scroll", handleScroll);
-                     };
-              }
-       }, []); // Empty dependency array ensures useEffect runs only once on component mount
+       //               window.addEventListener("scroll", handleScroll);
+       //               return () => {
+       //                      window.removeEventListener("scroll", handleScroll);
+       //               };
+       //        }
+       // }, []); // Empty dependency array ensures useEffect runs only once on component mount
 
-       useEffect(() => {}, [canScrollRight]);
-       // Initialize Firebase
+       // useEffect(() => {}, [canScrollRight]);
+       // // Initialize Firebase
 
        return (
               <div className="App" ref={containerRef}>
                      <div className="header">
-                            {canScrollRight ? <div style={{ position: "absolute", fontSize: "1vw" }}>scroll right</div> : ""}
+                             {/* {canScrollRight ? <div style={{ position: "absolute", fontSize: "1vw" }}>scroll right</div> : ""} */}
                             <h1 className="header-text">Pick A Pixel</h1>
                      </div>
                      <PixelGrid
