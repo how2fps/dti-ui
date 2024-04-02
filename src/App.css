@@ -10,7 +10,7 @@
 }
 
 .header {
-       position: fixed;
+       position: relative;
        width: 100%;
        background: rgba(0, 0, 0, 0.2);
        text-align: center;
