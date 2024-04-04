@@ -1,13 +1,13 @@
 import { Button, Modal, Typography } from "@mui/material";
 import { hsvaToRgbString } from "@uiw/color-convert";
 import { Wheel } from "@uiw/react-color";
-import { React, useState } from "react";
+import { React } from "react";
 import "./ColorPickerModal.css";
 
-const ColorPickerModal = ({ selectedPixel, setSelectedPixel, setGridData }) => {
-       const [hsva, setHsva] = useState({ h: 214, s: 43, v: 90, a: 1 });
+const ColorPickerModal = ({ selectedPixel, setSelectedPixel, setGridData, hsva, setHsva }) => {
        const closeModal = () => {
               setSelectedPixel(null);
+              setHsva({ h: 0, s: 0, v: 100, a: 1 });
        };
 
        const changePixelColor = async (selectedPixel) => {
@@ -39,12 +39,13 @@ const ColorPickerModal = ({ selectedPixel, setSelectedPixel, setGridData }) => {
                      onClose={closeModal}
                      aria-labelledby="modal-modal-title"
                      aria-describedby="modal-modal-description">
-                     <div style={{ marginTop: "20vh", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", background: "rgba(255,255,255,0.2)" }}>
+                     <div style={{ outline: "none", marginTop: "20vh", marginLeft: "40vw", display: "flex", width: "fit-content", justifyContent: "center", flexDirection: "column", alignItems: "center", right: "50%", border: "none" }}>
                             <Typography
                                    id="modal-modal-title"
                                    variant="h6"
+                                   style={{ textShadow: "-1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000, -2px 2px 0 #000, -2px 0 0 #000", color: "white", fontSize: "42px", fontWeight: "bold", marginBottom: "2px", lineHeight: "2" }}
                                    component="h2">
-                                   PICK COLOUR
+                                   PICK A COLOUR
                             </Typography>
                             <Wheel
                                    color={hsva}
@@ -53,12 +54,24 @@ const ColorPickerModal = ({ selectedPixel, setSelectedPixel, setGridData }) => {
                                    }}
                             />
 
-                            <div style={{ width: "20%", height: 31, marginTop: 5, marginBottom: 5, background: hsvaToRgbString(hsva) }}></div>
-                            <Button
-                                   variant="contained"
-                                   onClick={() => changePixelColor(selectedPixel)}>
-                                   Select this colour
-                            </Button>
+                            <div style={{ display: "flex", flexDirection: "column" }}>
+                                   <Button
+                                          color="success"
+                                          style={{ marginTop: "20px" }}
+                                          variant="contained"
+                                          size="large"
+                                          onClick={() => changePixelColor(selectedPixel)}>
+                                          Select this colour
+                                   </Button>
+                                   <Button
+                                          color="error"
+                                          style={{ marginTop: "10px" }}
+                                          variant="contained"
+                                          size="large"
+                                          onClick={() => closeModal()}>
+                                          Cancel
+                                   </Button>
+                            </div>
                      </div>
               </Modal>
        );
