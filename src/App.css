@@ -16,6 +16,21 @@
        text-align: center;
        pointer-events: none;
 }
+.arrive-header {
+       position: relative;
+       width: 100%;
+       background: rgb(12, 130, 37);
+       text-align: center;
+       pointer-events: none;
+}
+.arrive-header-text {
+       padding: 0.5vw 0 0.675vw;
+       margin: 0;
+       font-size: 3.5vw;
+       color: white;
+       text-size-adjust: none;
+       -webkit-text-size-adjust: none;
+}
 
 .header-text {
        padding: 1vw 0 1.2vw;
