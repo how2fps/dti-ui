@@ -6,6 +6,8 @@ function App() {
        const containerRef = useRef(null);
        const [gridData, setGridData] = useState(Array(10).fill(Array(70).fill("")));
        const [busArrived, setBusArrived] = useState(false);
+       const [busLeaving, setBusLeaving] = useState(false);
+
        useEffect(() => {
               const ws = new WebSocket.w3cwebsocket("ws://localhost:8080");
 
@@ -17,10 +19,13 @@ function App() {
                      if (message.data === "bus_arrives") {
                             setBusArrived(true);
                      }
-                     if (message.data === "bus_left") {
+                     if (message.data === "bus_leaving") {
+                            setBusLeaving(true);
                             setBusArrived(false);
+                            setTimeout(() => {
+                                   setBusLeaving(false);
+                            }, 5500);
                      }
-                     console.log("received:", message.data);
                      // Handle received message from server
               };
 
@@ -28,12 +33,12 @@ function App() {
                      ws.close();
               };
        }, []);
+
        useEffect(() => {
               async function fetchPixels() {
                      try {
                             const response = await fetch("http://localhost:3000/pixel");
                             const reader = response.body.getReader();
-                            console.log(reader);
                             const chunks = [];
                             const consumeStream = async () => {
                                    try {
@@ -54,7 +59,6 @@ function App() {
                             // Call the function to consume the stream
                             await consumeStream();
                             const pixelGridData = JSON.parse(chunks.join());
-                            console.log(pixelGridData);
                             setGridData(pixelGridData);
                      } catch (e) {
                             console.log(e);
@@ -67,13 +71,19 @@ function App() {
               <div
                      className="App"
                      ref={containerRef}>
-                     {!busArrived ? (
-                            <div className="header">
-                                   <h1 className="header-text">Add your touch by changing a pixel!</h1>
-                            </div>
+                     {!busLeaving ? (
+                            !busArrived ? (
+                                   <div className="header">
+                                          <h1 className="header-text">Add your touch by changing a pixel!</h1>
+                                   </div>
+                            ) : (
+                                   <div className="arrive-header">
+                                          <h1 className="arrive-header-text">Bus 187 has arrived</h1>
+                                   </div>
+                            )
                      ) : (
-                            <div className="arrive-header">
-                                   <h1 className="arrive-header-text">Bus 187 has arrived</h1>
+                            <div className="leave-header">
+                                   <h1 className="leave-header-text">Bus 187 is leaving</h1>
                             </div>
                      )}
                      <PixelGrid

@@ -16,6 +16,14 @@
        text-align: center;
        pointer-events: none;
 }
+.header-text {
+       padding: 0.5vw 0 0.675vw;
+       margin: 0;
+       font-size: 3.5vw;
+       background: rgb(255, 254, 237);
+       text-size-adjust: none;
+       -webkit-text-size-adjust: none;
+}
 .arrive-header {
        position: relative;
        width: 100%;
@@ -31,15 +39,22 @@
        text-size-adjust: none;
        -webkit-text-size-adjust: none;
 }
-
-.header-text {
-       padding: 1vw 0 1.2vw;
+.leave-header {
+       position: relative;
+       width: 100%;
+       background: rgb(255, 119, 0);
+       text-align: center;
+       pointer-events: none;
+}
+.leave-header-text {
+       padding: 0.5vw 0 0.675vw;
        margin: 0;
-       font-size: 2.78vw;
-       background: rgb(255, 254, 237);
+       font-size: 3.5vw;
+       color: white;
        text-size-adjust: none;
        -webkit-text-size-adjust: none;
 }
+
 .claim {
        font-size: 2vw;
 }
